@@ -15,6 +15,15 @@ const isRequired = value => value == '' ? false : true;
 // Función que verifica si la longitud de un valor está entre un rango dado
 const isBetween = (length, min, max) => length < min || length > max ? false : true;
 
+
+const emailValid = email => {
+    // Expresión regular para validar el formato de un correo electrónico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Verifica si el correo electrónico coincide con la expresión regular
+    return emailRegex.test(email);
+};
+
 // Función que verifica la validez del nombre de usuario
 const checkUsername = () => {
     // Variable bandera para indicar si el nombre de usuario es válido
@@ -35,10 +44,23 @@ const checkUsername = () => {
         valid = true;
     }
 
-    // Devuelve la bandera que indica si el nombre de usuario es válido
+    // Devuelve la variable bandera que indica si el nombre de usuario es válido
     return valid;
 }
 
+const correoElectronico = () =>{
+    let valid = false;
+
+    if(!isRequired(email.value.trim())){
+        showError('El correo no puede estar en blanco');
+    }else if (!emailValid(email.value)){
+        showError('El correo no es valido');
+    }else {
+        showSuccess(email.value);
+        valid = true;
+    }
+    return valid;
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("formulario");
